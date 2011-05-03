@@ -23,7 +23,6 @@ public class PhonebookFacade {
     private static final String USERS_CATALOG_BASE_DN = "ou=users,ou=mimuw,o=uw,l=waw,c=pl";
 
     public PhonebookConnection logIn(String ldapServerAddress, int ldapServerPort, String username, String password) {
-        verifyParameters(ldapServerAddress, username, password);
         Hashtable<String, Object> connectionParameters = createConnectionParameters(ldapServerAddress, ldapServerPort, username, password);
         return tryLogin(connectionParameters, username);
     }
@@ -57,13 +56,6 @@ public class PhonebookFacade {
             throw new InvalidCredentialsException("Wrong username or password.", e);
         }
     }
-
-    private void verifyParameters(String ldapServerAddress, String username, String password) {
-        Preconditions.checkArgument(!isNullOrEmpty(ldapServerAddress));
-        Preconditions.checkArgument(!isNullOrEmpty(username));
-        Preconditions.checkArgument(!isNullOrEmpty(password));
-    }
-
 
     //we miss you so hard, dear <> operator...
     private static <K, V> Hashtable<K, V> newHashTable() {
