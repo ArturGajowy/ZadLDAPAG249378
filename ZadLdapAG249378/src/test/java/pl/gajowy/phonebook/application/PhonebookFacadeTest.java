@@ -1,6 +1,9 @@
-package pl.gajowy.phonebook;
+package pl.gajowy.phonebook.application;
 
 import org.junit.Test;
+import pl.gajowy.phonebook.Fixture;
+import pl.gajowy.phonebook.application.exception.InvalidConnectionParamtersException;
+import pl.gajowy.phonebook.application.exception.InvalidCredentialsException;
 
 import static pl.gajowy.phonebook.Fixture.ldapServerAddress;
 import static pl.gajowy.phonebook.Fixture.ldapServerPort;

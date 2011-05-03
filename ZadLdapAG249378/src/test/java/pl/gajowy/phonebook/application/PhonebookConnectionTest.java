@@ -1,7 +1,12 @@
-package pl.gajowy.phonebook;
+package pl.gajowy.phonebook.application;
 
+import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
+import pl.gajowy.phonebook.Fixture;
+import pl.gajowy.phonebook.MimuwOrgPerson;
+import pl.gajowy.phonebook.application.PhonebookConnection;
+import pl.gajowy.phonebook.application.PhonebookFacade;
 
 import javax.naming.NamingException;
 import java.util.List;
@@ -20,13 +25,27 @@ public class PhonebookConnectionTest {
     }
 
     @Test
-    public void shouldGetUserData() {
+    public void shouldGetAllVisibleEntries() {
         //when
-        //FIXME generic type
         List<?> phonebookEntries = connection.findPhonebookEntries("", "", "");
 
         //then
-        assertThat(phonebookEntries.size(), is(Fixture.phoneBookEntriesVisibleForLegitUser));
+        assertThat(phonebookEntries.size(), Is.is(Fixture.phoneBookEntriesVisibleForLegitUser));
+
+        //FIXME closing the connection
+    }
+
+    @Test
+    public void shouldFetchUserData() {
+        //when
+        List<MimuwOrgPerson> phonebookEntries = connection.findPhonebookEntries(legitUsername, legitFirstName, legitLastName);
+
+        //then
+        assertThat(phonebookEntries.size(), Is.is(1));
+        MimuwOrgPerson fetchedPerson = phonebookEntries.get(0);
+        assertThat(fetchedPerson.getFirstName(), is(legitFirstName));
+        assertThat(fetchedPerson.getLastName(), is(legitLastName));
+        assertThat(fetchedPerson.getUsername(), is(legitUsername));
 
         //FIXME closing the connection
     }

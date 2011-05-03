@@ -1,6 +1,7 @@
-package pl.gajowy.phonebook;
+package pl.gajowy.phonebook.application;
 
 import com.google.common.annotations.VisibleForTesting;
+import pl.gajowy.phonebook.MimuwOrgPerson;
 
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
@@ -16,13 +17,15 @@ public class PhonebookConnection {
 
     @VisibleForTesting InitialDirContext ldapContext;
     private String loggedInUsername;
+    private PersonConverter personConverter;
 
     public PhonebookConnection(InitialDirContext ldapContext, String username) {
         this.ldapContext = ldapContext;
         this.loggedInUsername = username;
+        personConverter = new PersonConverter();
     }
 
-    public List findPhonebookEntries(String userName, String firstName, String lastName) {
+    public List<MimuwOrgPerson> findPhonebookEntries(String userName, String firstName, String lastName) {
         String[] attrIDs = {"cn", "givenName", "sn", "telephoneNumber", "nameDay"};
         SearchControls ctls = new SearchControls();
         ctls.setReturningAttributes(attrIDs);
@@ -38,15 +41,7 @@ public class PhonebookConnection {
             throw new RuntimeException(e); //FIXME !!!!!
         }
 
-        ArrayList result = newArrayList();
-        try {
-            while (answer.hasMore()) {
-                result.add(answer.next());
-            }
-        } catch (NamingException e) {
-            throw new RuntimeException(e); //FIXME !!!!!
-        }
-        return result;
+        return personConverter.convertToPersons(answer);
     }
 
     public void createPhonebookEntry(MimuwOrgPerson person) {

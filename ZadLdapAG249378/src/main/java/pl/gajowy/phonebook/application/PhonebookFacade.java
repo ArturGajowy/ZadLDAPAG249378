@@ -1,8 +1,10 @@
-package pl.gajowy.phonebook;
+package pl.gajowy.phonebook.application;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Preconditions;
 import com.sun.jndi.ldap.LdapCtxFactory;
+import pl.gajowy.phonebook.PersonStateFactory;
+import pl.gajowy.phonebook.application.exception.InvalidConnectionParamtersException;
+import pl.gajowy.phonebook.application.exception.InvalidCredentialsException;
 
 import javax.naming.CommunicationException;
 import javax.naming.Context;
@@ -13,7 +15,6 @@ import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.google.common.collect.Lists.newArrayList;
 
 public class PhonebookFacade {

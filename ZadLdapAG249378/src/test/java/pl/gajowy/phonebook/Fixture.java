@@ -5,6 +5,8 @@ public class Fixture {
     public static final int ldapServerPort = 1389;
     public static final String legitUsername = "jan1";
     public static final String legitPassword = "jan1";
+    public static final String legitFirstName = "Jan";
+    public static final String legitLastName = "Kowalski";
     public static int phoneBookEntriesVisibleForLegitUser = 4;
 
     public static final String newFirstName = "newFirstName";

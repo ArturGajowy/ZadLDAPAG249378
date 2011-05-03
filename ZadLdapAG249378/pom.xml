@@ -93,7 +93,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>pl.gajowy.phonebook.gui.MainForm</mainClass>
+                            <mainClass>pl.gajowy.phonebook.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -1,4 +1,4 @@
-package pl.gajowy.phonebook;
+package pl.gajowy.phonebook.application.exception;
 
 import javax.naming.NamingException;
 
