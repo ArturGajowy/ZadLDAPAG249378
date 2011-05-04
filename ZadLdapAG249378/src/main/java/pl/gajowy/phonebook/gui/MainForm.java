@@ -1,18 +1,23 @@
 package pl.gajowy.phonebook.gui;
 
-import org.pushingpixels.substance.api.SubstanceLookAndFeel;
-import org.pushingpixels.substance.api.skin.*;
-import pl.gajowy.phonebook.MimuwOrgPerson;
+import pl.gajowy.phonebook.domain.MimuwOrgPerson;
+import pl.gajowy.phonebook.domain.Validator;
 import pl.gajowy.phonebook.application.PhonebookConnection;
 import pl.gajowy.phonebook.application.exception.PhonebookException;
 import pl.gajowy.phonebook.application.PhonebookFacade;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.validation.ConstraintViolation;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+
+import static com.google.common.base.Strings.emptyToNull;
+import static com.google.common.collect.Lists.newArrayList;
+import static java.lang.String.format;
 
 public class MainForm {
     private static final String SEARCH_CARD = "SearchCard";
@@ -31,46 +36,108 @@ public class MainForm {
     private JTextField newFirstNameField;
     private JTextField newLastNameField;
     private JTextField newNameDayField;
-    private JTextField newTelephoneNumberField;
+    private JTextField newPhoneNumberField;
     private JButton saveNewEntryButton;
     private JLabel loginValidatorLabel;
+    private JLabel createEntryValidatorMessages;
+    private JLabel newUsernameLabel;
+    private JLabel newFirstNameLabel;
+    private JLabel newLastNameLabel;
+    private JLabel newNameDayLabel;
+    private JLabel newPhoneNumberLabel;
     private String ldapServerAddress;
     private int ldapServerPort;
     private PhonebookConnection phonebookConnection;
+
+    private final ActionListener loginPerformingListener = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            logIn();
+        }
+    };
+    private ActionListener searchPerformingListener = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            search();
+        }
+    };
+    private final ActionListener entryCreatingListener = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            createNewEntry();
+        }
+    };
 
     public MainForm(String ldapServerAddress, int ldapServerPort) {
         this.ldapServerAddress = ldapServerAddress;
         this.ldapServerPort = ldapServerPort;
 
-        loginButton.addActionListener(new ActionListener() {
+        loginButton.addActionListener(loginPerformingListener);
+        searchButton.addActionListener(searchPerformingListener);
+        saveNewEntryButton.addActionListener(entryCreatingListener);
+        switchToCreationButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                logIn();
+                switchToCreateEntryCard();
             }
         });
-        searchButton.addActionListener(new ActionListener() {
+        searchPhonebookButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                search();
+                switchToSearchCard();
             }
         });
-        saveNewEntryButton.addActionListener(new ActionListener() {
+        addConvenienceKeyboardActionListeners();
+        setCreateNewEntryFormLabels();
+    }
+
+    private void switchToCreateEntryCard() {
+        switchDisplayedCardTo(CREATE_ENTRY_CARD);
+        newUsernameField.requestFocus();
+    }
+
+    private void switchToSearchCard() {
+        switchDisplayedCardTo(SEARCH_CARD);
+        searchField.requestFocus();
+    }
+
+    private void setCreateNewEntryFormLabels() {
+        newFirstNameLabel.setText(MimuwOrgPerson.FIRST_NAME);
+        newLastNameLabel.setText(MimuwOrgPerson.LAST_NAME);
+        newUsernameLabel.setText(MimuwOrgPerson.USER_NAME);
+        newNameDayLabel.setText(MimuwOrgPerson.NAMEDAY);
+        newPhoneNumberLabel.setText(MimuwOrgPerson.PHONE_NUMBER);
+    }
+
+    private void addConvenienceKeyboardActionListeners() {
+        usernameField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                createNewEntry();
+                passwordField.requestFocus();
             }
         });
-        switchToCreationButton.addActionListener(new SwitchCardActionListener(CREATE_ENTRY_CARD));
-        searchPhonebookButton.addActionListener(new SwitchCardActionListener(SEARCH_CARD));
+        passwordField.addActionListener(loginPerformingListener);
+        searchField.addActionListener(searchPerformingListener);
+        addListenerToFields(
+                entryCreatingListener,
+                newUsernameField, newFirstNameField, newLastNameField, newNameDayField, newPhoneNumberField
+        );
+    }
+
+    private void addListenerToFields(ActionListener listener, JTextField... fields) {
+        for (JTextField field : fields) {
+            field.addActionListener(listener);
+        }
     }
 
     private void createUIComponents() {
+        setUpSearchResultsTable();
+    }
+
+    private void setUpSearchResultsTable() {
         searchResultsTable = new JTable();
-        ReadOnlyDefaultTableModel searchResultTableModel = new ReadOnlyDefaultTableModel(
-                new String[]{
-                        "Surname", "Name", "Login", "Name day", "Phone number"
-                },
-                new Class[]{
-                        String.class, String.class, String.class, String.class, String.class, String.class
-                });
-        searchResultsTable.setModel(searchResultTableModel);
+        String[] columnNames = {
+                MimuwOrgPerson.LAST_NAME, MimuwOrgPerson.FIRST_NAME, MimuwOrgPerson.USER_NAME,
+                MimuwOrgPerson.NAMEDAY, MimuwOrgPerson.PHONE_NUMBER
+        };
+        Class[] columnTypes = {
+                String.class, String.class, String.class, String.class, String.class, String.class
+        };
+        searchResultsTable.setModel(new ReadOnlyDefaultTableModel(columnNames, columnTypes));
         searchResultsTable.setEnabled(true);
     }
 
@@ -78,6 +145,7 @@ public class MainForm {
         loginValidatorLabel.setText("Logging in...");
         final String username = usernameField.getText();
         final String password = stringOfChars(passwordField.getPassword());
+
         new SwingWorker<Void, Void>() {
 
             @Override
@@ -91,13 +159,12 @@ public class MainForm {
                 tryLogin(username, password);
             }
         }.execute();
-
     }
 
     private void tryLogin(String username, String password) {
         try {
             phonebookConnection = new PhonebookFacade().logIn(ldapServerAddress, ldapServerPort, username, password);
-            switchDisplayedCardTo(SEARCH_CARD);
+            switchToSearchCard();
         } catch (PhonebookException e) {
             loginValidatorLabel.setText(e.getMessage());
         }
@@ -113,12 +180,16 @@ public class MainForm {
 
     private void search() {
         String searchString = searchField.getText();
+        clearTable(searchResultsTable);
         List<MimuwOrgPerson> phonebookEntries = phonebookConnection.findPhonebookEntries(searchString, searchString, searchString);
         displayInSearchResultsTable(phonebookEntries);
     }
 
+    private void clearTable(JTable tableToClear) {
+        ((DefaultTableModel) tableToClear.getModel()).setRowCount(0);
+    }
+
     private void displayInSearchResultsTable(List<MimuwOrgPerson> phonebookEntries) {
-        clearTable(searchResultsTable);
         DefaultTableModel tableModel = (DefaultTableModel) searchResultsTable.getModel();
         for (MimuwOrgPerson phonebookEntry : phonebookEntries) {
             addRow(tableModel, phonebookEntry);
@@ -144,31 +215,71 @@ public class MainForm {
         }
     }
 
-    private void clearTable(JTable tableToClear) {
-        ((DefaultTableModel) tableToClear.getModel()).setRowCount(0);
+    private void createNewEntry() {
+        clearTextOn(createEntryValidatorMessages);
+        MimuwOrgPerson person = new MimuwOrgPerson(
+                emptyToNull(newFirstNameField.getText()),
+                emptyToNull(newLastNameField.getText()),
+                emptyToNull(newUsernameField.getText()),
+                emptyToNull(newNameDayField.getText()),
+                emptyToNull(newPhoneNumberField.getText())
+        );
+        createEntryOrReportErrors(person);
     }
 
-    private void createNewEntry() {
+    private void createEntryOrReportErrors(MimuwOrgPerson person) {
+        Set<ConstraintViolation<MimuwOrgPerson>> violations = Validator.instance.get().validate(person);
+        if (violations.isEmpty()) {
+            phonebookConnection.createPhonebookEntry(person);
+            createEntryValidatorMessages.setText("Entry created.");
+        } else {
+            createEntryValidatorMessages.setText(toSortedHtmlList(violations));
+        }
+    }
 
+    private String toSortedHtmlList(Set<ConstraintViolation<MimuwOrgPerson>> violations) {
+        return renderAsHtmlList(getSortedMessages(violations));
+    }
+
+    private List<String> getSortedMessages(Set<ConstraintViolation<MimuwOrgPerson>> violations) {
+        List<String> sortedViolationMessages = newArrayList();
+        for (ConstraintViolation<MimuwOrgPerson> violation : violations) {
+            sortedViolationMessages.add(violation.getMessage());
+        }
+        Collections.sort(sortedViolationMessages);
+        return sortedViolationMessages;
+    }
+
+    private String renderAsHtmlList(List<String> messages) {
+        StringBuilder html = new StringBuilder();
+        html.append("<html>");
+        for (String message : messages) {
+            html.append(format("<li>%s</li>", message));
+        }
+        html.append("</html>");
+        return html.toString();
     }
 
     public JPanel getContentPane() {
         return contentPane;
     }
 
-    private class SwitchCardActionListener implements ActionListener {
-        private String targetCardName;
-
-        private SwitchCardActionListener(String targetCardName) {
-            this.targetCardName = targetCardName;
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            switchDisplayedCardTo(targetCardName);
-        }
+    public WindowListener getCloseListener() {
+        return new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (phonebookConnection != null) {
+                    phonebookConnection.close();
+                }
+            }
+        };
     }
 
     private void switchDisplayedCardTo(String cardName) {
         ((CardLayout) contentPane.getLayout()).show(contentPane, cardName);
+    }
+
+    private void clearTextOn(JLabel label) {
+        label.setText("");
     }
 }

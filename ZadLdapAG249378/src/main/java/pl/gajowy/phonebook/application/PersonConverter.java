@@ -1,6 +1,7 @@
 package pl.gajowy.phonebook.application;
 
-import pl.gajowy.phonebook.MimuwOrgPerson;
+import pl.gajowy.phonebook.application.exception.ThingThatShouldNotBeException;
+import pl.gajowy.phonebook.domain.MimuwOrgPerson;
 
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
@@ -16,7 +17,7 @@ public class PersonConverter {
         try {
             return tryConvertToPersons(answer);
         } catch (NamingException e) {
-            throw new RuntimeException(e); //FIXME !!!!
+            throw new ThingThatShouldNotBeException("Could'not convert to ldap answer to person", e);
         }
     }
 

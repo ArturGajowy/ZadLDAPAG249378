@@ -10,36 +10,80 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <slf4j.version>1.6.1</slf4j.version>
+        <hibernate-validator.version>4.1.0.Final</hibernate-validator.version>
+        <guava.version>r07</guava.version>
+        <intellij-runtimes.version>10.0.3</intellij-runtimes.version>
+        <substance.version>6.0</substance.version>
+        <junit.version>4.8.2</junit.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>jboss</id>
+            <url>http://repository.jboss.com/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.2</version>
-            <scope>test</scope>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>r07</version>
+            <version>${guava.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.intellij</groupId>
             <artifactId>forms_rt</artifactId>
-            <version>10.0.3</version>
+            <version>${intellij-runtimes.version}</version>
         </dependency>
         <dependency>
             <groupId>com.intellij</groupId>
             <artifactId>javac2</artifactId>
-            <version>10.0.3</version>
+            <version>${intellij-runtimes.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.java.net.substance</groupId>
             <artifactId>substance</artifactId>
-            <version>6.0</version>
+            <version>${substance.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 
@@ -66,12 +110,12 @@
                     <dependency>
                         <groupId>com.intellij</groupId>
                         <artifactId>forms_rt</artifactId>
-                        <version>10.0.3</version>
+                        <version>${intellij-runtimes.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>com.intellij</groupId>
                         <artifactId>javac2</artifactId>
-                        <version>10.0.3</version>
+                        <version>${intellij-runtimes.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

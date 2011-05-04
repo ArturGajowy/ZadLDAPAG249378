@@ -1,12 +1,11 @@
 package pl.gajowy.phonebook.application;
 
 import org.hamcrest.core.Is;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import pl.gajowy.phonebook.Fixture;
-import pl.gajowy.phonebook.MimuwOrgPerson;
-import pl.gajowy.phonebook.application.PhonebookConnection;
-import pl.gajowy.phonebook.application.PhonebookFacade;
+import pl.gajowy.phonebook.domain.MimuwOrgPerson;
 
 import javax.naming.NamingException;
 import java.util.List;
@@ -24,6 +23,11 @@ public class PhonebookConnectionTest {
         connection = new PhonebookFacade().logIn(ldapServerAddress, ldapServerPort, legitUsername, legitPassword);
     }
 
+    @After
+    public void tearDown() {
+        connection.close();
+    }
+
     @Test
     public void shouldGetAllVisibleEntries() {
         //when
@@ -31,8 +35,6 @@ public class PhonebookConnectionTest {
 
         //then
         assertThat(phonebookEntries.size(), Is.is(Fixture.phoneBookEntriesVisibleForLegitUser));
-
-        //FIXME closing the connection
     }
 
     @Test
@@ -46,8 +48,6 @@ public class PhonebookConnectionTest {
         assertThat(fetchedPerson.getFirstName(), is(legitFirstName));
         assertThat(fetchedPerson.getLastName(), is(legitLastName));
         assertThat(fetchedPerson.getUsername(), is(legitUsername));
-
-        //FIXME closing the connection
     }
 
     @Test

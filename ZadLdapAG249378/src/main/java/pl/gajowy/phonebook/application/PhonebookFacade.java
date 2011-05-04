@@ -2,7 +2,7 @@ package pl.gajowy.phonebook.application;
 
 import com.google.common.base.Joiner;
 import com.sun.jndi.ldap.LdapCtxFactory;
-import pl.gajowy.phonebook.PersonStateFactory;
+import pl.gajowy.phonebook.infrastructure.PersonStateFactory;
 import pl.gajowy.phonebook.application.exception.InvalidConnectionParamtersException;
 import pl.gajowy.phonebook.application.exception.InvalidCredentialsException;
 
