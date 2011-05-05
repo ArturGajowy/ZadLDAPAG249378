@@ -1,0 +1,133 @@
+dn: ou=mimuw,o=uw,l=waw,c=pl
+objectClass: organizationalUnit
+objectClass: top
+ou: mimuw
+entryUUID: a8ef6b61-3e11-3637-aee0-c7f3dd518c5e
+
+dn: ou=users,ou=mimuw,o=uw,l=waw,c=pl
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+entryUUID: 84402853-844b-476f-8946-5ea308376af4
+createTimestamp: 20110504231202Z
+creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+
+dn: cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: mimuwOrgPerson
+objectClass: top
+userPassword: {SSHA}JR/J3By0KJF0kdR1BbUEXi+16JyMTlYKtbw9gw==
+givenName: Jan
+nameDay: 0229
+cn: jan1
+sn: Kowalski
+entryUUID: d8849880-d232-45d0-9a0a-07106838a775
+createTimestamp: 20110504231202Z
+creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+pwdChangedTime: 20110504231202.885Z
+modifyTimestamp: 20110504231304Z
+modifiersName: cn=Directory Manager,cn=Root DNs,cn=config
+
+dn: ou=addressbook,cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+objectClass: organizationalUnit
+objectClass: top
+ou: addressbook
+entryUUID: f3d95eb4-e307-4676-902f-f17953fabfbc
+createTimestamp: 20110504231202Z
+creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+
+dn: cn=mama,ou=addressbook,cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: mimuwOrgPerson
+objectClass: top
+userPassword: {SSHA}ZkKWYiqjAhdMak9iANvZ7ZqwkZBHPgMeSnPofQ==
+givenName: Anna
+cn: mama
+sn: Kowalska
+telephoneNumber:: NjkzMTIzNDU2IA==
+entryUUID: 57889ec9-55e3-4b0c-8282-f32b209bbdbe
+createTimestamp: 20110504231202Z
+creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+pwdChangedTime: 20110504231202.885Z
+modifyTimestamp: 20110504231304Z
+modifiersName: cn=Directory Manager,cn=Root DNs,cn=config
+
+dn: cn=gtimoszuk,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: mimuwOrgPerson
+objectClass: top
+userPassword: {SSHA}IKW/ME08Ge2Sctl5P70vxbQFfu4RFunJxGjPpQ==
+givenName: Grzegorz
+cn: gtimoszuk
+sn: Timoszuk
+entryUUID: 78ccdef7-fe05-41c8-8a5c-782fd6fe3d98
+pwdChangedTime: 20110504231202.885Z
+creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+createTimestamp: 20110504231202Z
+modifyTimestamp: 20110504231304Z
+modifiersName: cn=Directory Manager,cn=Root DNs,cn=config
+
+dn: ou=addressbook,cn=gtimoszuk,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+objectClass: organizationalUnit
+objectClass: top
+ou: addressbook
+entryUUID: 2aa2512d-191f-4e52-bab5-38a967676879
+createTimestamp: 20110504231202Z
+creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+
+dn: ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+objectClass: organizationalUnit
+objectClass: top
+ou:: Z3JvdXBzIA==
+entryUUID: de18e339-cb88-4911-b5ea-3f8c06785e34
+createTimestamp: 20110504231202Z
+creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+
+dn: cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+objectClass: groupOfUniqueNames
+objectClass: top
+cn: studenci
+uniqueMember: cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+entryUUID: fb555b6c-d2ab-4d4a-b7f1-18da9ceab76a
+createTimestamp: 20110504231202Z
+creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+
+dn: ou=addressbook,cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+objectClass: organizationalUnit
+objectClass: top
+ou:: YWRkcmVzc2Jvb2sgIA==
+entryUUID: 13b219b4-ee3d-49f6-9026-d25eb8d4a39d
+createTimestamp: 20110504231202Z
+creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+
+dn: cn=rzecznik_praw_obywatlskich,ou=addressbook,cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: mimuwOrgPerson
+objectClass: top
+givenName:: TWllY3p5c8WCYXc=
+cn: rzecznik_praw_obywatlskich
+telephoneNumber: 224325522
+sn:: SWtzacWEc2tp
+entryUUID: 96e372f1-61cc-48b4-b4a3-c583f97cd6e4
+creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+createTimestamp: 20110504231202Z
+modifyTimestamp: 20110504231304Z
+modifiersName: cn=Directory Manager,cn=Root DNs,cn=config
+
+dn: cn=doktoranci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+objectClass: groupOfUniqueNames
+objectClass: top
+cn: doktoranci
+uniqueMember: cn=gtimoszuk,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+entryUUID: 8f059906-ecfb-4789-a1a1-a1f2af6cb67d
+createTimestamp: 20110504231202Z
+creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+

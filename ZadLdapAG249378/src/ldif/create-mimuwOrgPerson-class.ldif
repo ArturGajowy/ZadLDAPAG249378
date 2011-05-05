@@ -1,0 +1,11 @@
+dn: cn=schema
+objectClass: top
+objectClass: ldapSubentry
+objectClass: subschema
+cn: schema
+ldapSyntaxes: ( 1.3.6.1.4.1.26037.1.999.1000 DESC 'mmDD numeric nameday syntax' X-PATTERN '(((0[13578])|(1[02]))((0[1-9])|([1-2][0-9])|(3[01])))|(((0[469])|(11))((0[1-9])|([1-2][0-9])|(30)))|((02)((0[1-9])|([1-2][0-9])))$')
+attributeTypes: (1.3.6.1.4.1.26037.1.999.1001 NAME ('nameDay') DESC 'mmDD numeric nameDay' SYNTAX 1.3.6.1.4.1.26037.1.999.1000 SINGLE-VALUE X-ORIGIN 'out of the void' USAGE userApplications)
+objectClasses: ( 1.1.2.3.5.8.13.27 NAME 'mimuwOrgPerson' DESC 'an inetOrgPerson with an optional nameDay' SUP inetOrgPerson STRUCTURAL MUST ( objectClass $ cn $ sn ) MAY ( jpegPhoto $ x500UniqueIdentifier $ initials $ givenName $ audio $ manager $ displayName $ postalAddress $ postalCode $ postOfficeBox $ physicalDeliveryOfficeName $ title $ description $ uid $ businessCategory $ pager $ mobile $ roomNumber $ ou $ mail $ o $ photo $ registeredAddress $ internationaliSDNNumber $ x121Address $ facsimileTelephoneNumber $ preferredDeliveryMethod $ labeledURI $ destinationIndicator $ homePostalAddress $ telexNumber $ teletexTerminalIdentifier $ telephoneNumber $ userPKCS12 $ userPassword $ seeAlso $ userCertificate $ departmentNumber $ carLicense $ employeeType $ preferredLanguage $ employeeNumber $ nameDay $ userSMIMECertificate $ street $ homePhone $ l $ secretary $ st ) X-ORIGIN 'out of the void' )
+modifiersName: cn=Directory Manager,cn=Root DNs,cn=config
+modifyTimestamp: 20110430211908Z
+

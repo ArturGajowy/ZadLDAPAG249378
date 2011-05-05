@@ -1,0 +1,25 @@
+
+dn: ou=users,ou=mimuw,o=uw,l=waw,c=pl
+changetype: modify
+add: aci
+aci: (targetattr="*")(version 3.0; acl "allow users' own subtrees reads and modifications"; allow(all) userattr = "parent[0,1,2,3,4,5,6,7,8,9].entryDN#USERDN";)
+
+
+
+dn: ou=users,ou=mimuw,o=uw,l=waw,c=pl
+changetype: modify
+add: aci
+aci: (targetattr!="userPassword||authPassword")(version 3.0; acl "allow reading info about other group members"; allow(read,search,compare) userattr = "isMemberOf#GROUPDN";)
+
+
+
+dn: ou=addressbook,cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+changetype: modify
+add: aci
+aci: (targetattr="*")(version 3.0; acl "read and modify rights for members of group: studenci on it's addressbook"; allow(all) groupdn = "ldap:///cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl";)
+
+dn: ou=addressbook,cn=doktoranci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+changetype: modify
+add: aci
+aci: (targetattr="*")(version 3.0; acl "read and modify rights for members of group: doktoranci on it's addressbook"; allow(all) groupdn = "ldap:///cn=doktoranci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl";)
+

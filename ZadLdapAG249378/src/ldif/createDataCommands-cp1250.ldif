@@ -1,0 +1,80 @@
+dn: ou=users,ou=mimuw,o=uw,l=waw,c=pl
+objectclass: top
+objectclass: organizationalUnit
+ou: users
+
+dn: cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+objectclass: top
+objectclass: person
+objectclass: inetOrgPerson
+givenName: Jan
+sn: Kowalski
+cn: jan1
+userPassword: jan1
+
+dn: ou=addressbook,cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+objectclass: top
+objectclass: organizationalUnit
+ou: addressbook
+
+dn: cn=mama,ou=addressbook,cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+objectclass: top
+objectclass: person
+objectclass: inetOrgPerson
+givenName: Anna
+sn: Kowalska
+cn: mama
+userPassword: mama
+
+dn: cn=mama,ou=addressbook,cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+changetype: modify
+replace: telephonenumber
+telephonenumber: 693123456 
+
+dn: cn=gtimoszuk,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+objectclass: top
+objectclass: person
+objectclass: inetOrgPerson
+givenName: Grzegorz
+sn: Timoszuk
+cn: gtimoszuk
+userPassword: gtimoszuk
+
+dn: ou=addressbook,cn=gtimoszuk,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+objectclass: top
+objectclass: organizationalUnit
+ou: addressbook
+
+dn: ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+objectclass: top
+objectclass: organizationalUnit
+ou: groups 
+
+dn: cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+cn: studenci
+objectclass: top
+objectclass: groupOfUniqueNames
+uniqueMember: cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+
+dn: ou=addressbook,cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+objectclass: top
+objectclass: organizationalUnit
+ou: addressbook  
+
+dn: cn=rzecznik_praw_obywatlskich,ou=addressbook,cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+objectclass: top
+objectclass: person
+objectclass: inetOrgPerson
+givenName: Mieczys³aw
+sn: Iksiñski
+cn: rzecznik_praw_obywatlskich
+telephoneNumber: 224325522
+
+dn: cn=doktoranci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+cn: doktoranci
+objectclass: top
+objectclass: groupOfUniqueNames
+uniqueMember: cn=gtimoszuk,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+
+
+

@@ -1,1 +1,70 @@
 A project for course on Objectorial Databases @ www.mimuw.edu.pl
+
+====== Briefing for tutor goes here (polish): ======
+
+
+=== Jak zbudować: ===
+
+Aby mvn clean package powiodło się, należy:
+
+- przekopiować zawartość katalogu lib/ do lokalnego repozytorium maven-a (ponieważ używałem GUI designera z Intellij IDEA, konieczne było stworzenie paczek mavenowych z runtime'm i kompilatorem tegoż oraz podmienienie zależności w nieutrzymywanym już dawno pluginie do maven-a)
+
+- ustawić LDAP-a na localhost, na porcie 1389, z zawartością zgodną z treścią zadania (załączam backup - patrz dalej)(inaczej testy nie przejdą) / ewentualnie użyć -Dmaven.test.skip. Stałe użyte w testach (w tym port i adres serwera LDAP) zdefiniowane są w pl.gajowy.phonebook.Fixture
+
+
+=== Jak uruchamiać ===
+w katalogu, gdzie leży pom.xml:
+java -jar target/ZadLdapAG249378-1.0-jar-with-dependencies.jar ADRES_LDAPa PORT_LDAPa
+
+
+=== Zapis zmian wprawadzanych przez poszczególne etapy realizacji zadania: ===
+
+- Utworzyć instancję LDAP'a z założoną strukturą i przykładowymi danymi według powyższego schematu
+
+    src/ldif/createDataCommands-cp1250.ldif
+    src/ldif/createDataCommands-utf8.ldif
+    (rozróżnienie kodowania wprowadziłem, ponieważ windows nie radził sobie z utf8)
+    
+- Wprowadzić nową objectClassę (rozszerzającą inetOrgPerson): mimuwOrgPerson - rozszerzoną o opcjonalne pole nameday (4 literowy napis, MMdd)
+
+    Najpierw attribute syntax dla nameday:
+
+        src/ldif/nameDayAttributeSyntax.ldif
+        src/ldif/nameDayPatternCollapsed.txt - sam wzorzec regexp
+        src/ldif/nameDayPatternExpanded.txt - w czytelinejszej formie
+
+    Następnie objectClass:
+
+        src/ldif/create-mimuwOrgPerson-class.ldif
+
+    Zmiana objectClass istniejących w katalogu osób:
+
+        src/ldif/userClassModifications.ldif
+    
+- Skonfigurować uprawnienia według następujących zasad: (...)
+    Wyłącznie dostępu anonimowego - usunięcie przy pomocy dsconfig następującego globalnego aci:
+
+        : "(targetattr!="userPassword||authPassword")(version 3.0; acl
+        : "Anonymous read access"; allow (read,search,compare)
+        : userdn="ldap:///anyone";)"
+
+    Pozostałe uprawnienia:
+
+- Napisać program w wybranym języku programowania (np. PHP, Java) (...)
+    Użyte technologie i biblioteki:
+    - Java
+    - Swing
+    - Substance (skórka dla Swing-a)
+    - Hibernate Validator
+    - slf4j
+    - Google Guava ("utils")
+
+
+=== Pozostałe pliki i katalogi w repozytorium ===
+
+ldapDirectoryBackup
+ - Backup stworzony przez OpenDS. Hasło dla Directory Manager to "ldapowehaslo".
+ Wszyscy pozostali użytkownicy mają hasła takie same jak loginy.
+
+src/ldif/fullDirectoryExport.ldif
+ - pełny eksport danych z OpenDS, bez aci.

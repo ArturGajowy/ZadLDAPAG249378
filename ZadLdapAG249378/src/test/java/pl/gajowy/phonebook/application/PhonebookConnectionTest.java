@@ -62,7 +62,7 @@ public class PhonebookConnectionTest {
     @Test
     public void shouldCreateNewPhonebookEntry() throws NamingException {
         //given
-        MimuwOrgPerson person = new MimuwOrgPerson(newFirstName, newLastName, newUsername, "0101", "793111111, 793222222");
+        MimuwOrgPerson person = new MimuwOrgPerson(newFirstName, newLastName, newUsername, "0101", "793111111");
 
         try {
             //when

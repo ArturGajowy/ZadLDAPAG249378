@@ -3,7 +3,7 @@ package pl.gajowy.phonebook.gui;
 import javax.swing.table.DefaultTableModel;
 
 class ReadOnlyDefaultTableModel extends DefaultTableModel {
-    Class[] types;
+    final Class[] types;
 
     public ReadOnlyDefaultTableModel(String[] columnNames, Class[] columnTypes) {
         super(new Object[][]{}, columnNames);

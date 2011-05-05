@@ -1,0 +1,25 @@
+dn: cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+changetype: modify
+add: objectClass
+objectClass: mimuwOrgPerson
+
+dn: cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+changetype: modify
+replace: nameday
+nameday: 0229
+
+dn: cn=mama,ou=addressbook,cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+changetype: modify
+add: objectClass
+objectClass: mimuwOrgPerson
+
+dn: cn=gtimoszuk,ou=users,ou=mimuw,o=uw,l=waw,c=pl
+changetype: modify
+add: objectClass
+objectClass: mimuwOrgPerson
+
+dn: cn=rzecznik_praw_obywatlskich,ou=addressbook,cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+changetype: modify
+add: objectClass
+objectClass: mimuwOrgPerson
+

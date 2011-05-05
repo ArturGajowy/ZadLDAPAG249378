@@ -7,7 +7,7 @@ import javax.validation.Validation;
 public enum Validator {
     instance(Validation.buildDefaultValidatorFactory().getValidator());
 
-    private javax.validation.Validator validator;
+    private final javax.validation.Validator validator;
 
     public javax.validation.Validator get() {
         return validator;
