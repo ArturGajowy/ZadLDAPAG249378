@@ -76,5 +76,8 @@ objectclass: top
 objectclass: groupOfUniqueNames
 uniqueMember: cn=gtimoszuk,ou=users,ou=mimuw,o=uw,l=waw,c=pl
 
-
+dn: ou=addressbook,cn=doktoranci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+objectclass: top
+objectclass: organizationalUnit
+ou: addressbook
 

@@ -9,7 +9,7 @@ Aby mvn clean package powiodło się, należy:
 
 - przekopiować zawartość katalogu lib/ do lokalnego repozytorium maven-a (ponieważ używałem GUI designera z Intellij IDEA, konieczne było stworzenie paczek mavenowych z runtime'm i kompilatorem tegoż oraz podmienienie zależności w nieutrzymywanym już dawno pluginie do maven-a)
 
-- ustawić LDAP-a na localhost, na porcie 1389, z zawartością zgodną z treścią zadania (załączam backup - patrz dalej)(inaczej testy nie przejdą) / ewentualnie użyć -Dmaven.test.skip. Stałe użyte w testach (w tym port i adres serwera LDAP) zdefiniowane są w pl.gajowy.phonebook.Fixture
+- ustawić LDAP-a na localhost, na porcie 1389, z zawartością utworzoną zgodnie z dalszymi instrukcjami (załączam także backup wykonany przez OpenDS)(inaczej testy nie przejdą) / ewentualnie użyć -Dmaven.test.skip. Stałe użyte w testach (w tym port i adres serwera LDAP) zdefiniowane są w pl.gajowy.phonebook.Fixture
 
 
 === Jak uruchamiać ===
@@ -24,6 +24,8 @@ java -jar target/ZadLdapAG249378-1.0-jar-with-dependencies.jar ADRES_LDAPa PORT_
     src/ldif/createDataCommands-cp1250.ldif
     src/ldif/createDataCommands-utf8.ldif
     (rozróżnienie kodowania wprowadziłem, ponieważ windows nie radził sobie z utf8)
+
+    ldapmodify -a -h localhost -p 1389 -D "cn=Directory Manager" -w ldapowehaslo -f createDataCommands-cp1250.ldif
     
 - Wprowadzić nową objectClassę (rozszerzającą inetOrgPerson): mimuwOrgPerson - rozszerzoną o opcjonalne pole nameday (4 literowy napis, MMdd)
 
@@ -50,6 +52,8 @@ java -jar target/ZadLdapAG249378-1.0-jar-with-dependencies.jar ADRES_LDAPa PORT_
 
     Pozostałe uprawnienia:
 
+        src/ldif/aci.ldif
+
 - Napisać program w wybranym języku programowania (np. PHP, Java) (...)
     Użyte technologie i biblioteki:
     - Java
@@ -67,4 +71,4 @@ ldapDirectoryBackup
  Wszyscy pozostali użytkownicy mają hasła takie same jak loginy.
 
 src/ldif/fullDirectoryExport.ldif
- - pełny eksport danych z OpenDS, bez aci.
+ - pełny eksport danych z OpenDS (w tym nie-globalne aci)

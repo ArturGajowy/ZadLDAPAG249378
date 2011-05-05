@@ -1,9 +1,9 @@
 backend_dn=ds-cfg-backend-id=tasks,cn=Backends,cn=config
 
-backup_id=20110505012848
-backup_date=20110504232913Z
+backup_id=20110505210401
+backup_date=20110505190414Z
 incremental=false
 compressed=false
 encrypted=false
-property.archive_file=tasks-backup-20110505012848
+property.archive_file=tasks-backup-20110505210401
 

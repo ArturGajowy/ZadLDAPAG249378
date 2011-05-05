@@ -8,85 +8,89 @@ dn: ou=users,ou=mimuw,o=uw,l=waw,c=pl
 objectClass: organizationalUnit
 objectClass: top
 ou: users
-entryUUID: 84402853-844b-476f-8946-5ea308376af4
-createTimestamp: 20110504231202Z
+entryUUID: 75bb7ffe-7ee5-439a-94e6-015c4d53815e
+createTimestamp: 20110505185702Z
 creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+aci: (targetattr="*")(version 3.0; acl "allow users' own subtrees reads and modifications"; allow(all) userattr = "parent[0,1,2,3,4,5,6,7,8,9].entryDN#USERDN";)
+aci: (targetattr!="userPassword||authPassword")(version 3.0; acl "allow reading info about other group members"; allow(read,search,compare) userattr = "isMemberOf#GROUPDN";)
+modifyTimestamp: 20110505190022Z
+modifiersName: cn=Directory Manager,cn=Root DNs,cn=config
 
 dn: cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
 objectClass: person
-objectClass: organizationalPerson
 objectClass: inetOrgPerson
+objectClass: organizationalPerson
 objectClass: mimuwOrgPerson
 objectClass: top
-userPassword: {SSHA}JR/J3By0KJF0kdR1BbUEXi+16JyMTlYKtbw9gw==
+userPassword: {SSHA}OGzBc6S+QakoRH8TVC0vPXTDBKkmZZa/cRp1iw==
 givenName: Jan
 nameDay: 0229
 cn: jan1
 sn: Kowalski
-entryUUID: d8849880-d232-45d0-9a0a-07106838a775
-createTimestamp: 20110504231202Z
+entryUUID: 62ae0565-a71c-49b3-a66e-35a0478ed81d
+createTimestamp: 20110505185702Z
 creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
-pwdChangedTime: 20110504231202.885Z
-modifyTimestamp: 20110504231304Z
+pwdChangedTime: 20110505185702.147Z
+modifyTimestamp: 20110505185936Z
 modifiersName: cn=Directory Manager,cn=Root DNs,cn=config
 
 dn: ou=addressbook,cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
 objectClass: organizationalUnit
 objectClass: top
 ou: addressbook
-entryUUID: f3d95eb4-e307-4676-902f-f17953fabfbc
-createTimestamp: 20110504231202Z
+entryUUID: d682b90f-ff9e-4ae6-a098-5484ef4d1fe1
+createTimestamp: 20110505185702Z
 creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
 
 dn: cn=mama,ou=addressbook,cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
 objectClass: person
-objectClass: organizationalPerson
 objectClass: inetOrgPerson
+objectClass: organizationalPerson
 objectClass: mimuwOrgPerson
 objectClass: top
-userPassword: {SSHA}ZkKWYiqjAhdMak9iANvZ7ZqwkZBHPgMeSnPofQ==
+userPassword: {SSHA}aYxckjvL58slzu10qY/HQRbS77LLlL+pmcoUlw==
 givenName: Anna
 cn: mama
 sn: Kowalska
 telephoneNumber:: NjkzMTIzNDU2IA==
-entryUUID: 57889ec9-55e3-4b0c-8282-f32b209bbdbe
-createTimestamp: 20110504231202Z
+entryUUID: fcc39455-fa44-45ed-b5e1-d7997d72a47f
+createTimestamp: 20110505185702Z
 creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
-pwdChangedTime: 20110504231202.885Z
-modifyTimestamp: 20110504231304Z
+pwdChangedTime: 20110505185702.147Z
+modifyTimestamp: 20110505185936Z
 modifiersName: cn=Directory Manager,cn=Root DNs,cn=config
 
 dn: cn=gtimoszuk,ou=users,ou=mimuw,o=uw,l=waw,c=pl
 objectClass: person
-objectClass: organizationalPerson
 objectClass: inetOrgPerson
+objectClass: organizationalPerson
 objectClass: mimuwOrgPerson
 objectClass: top
-userPassword: {SSHA}IKW/ME08Ge2Sctl5P70vxbQFfu4RFunJxGjPpQ==
+userPassword: {SSHA}m6QPeguE8Lp9xs4YvhH2MLCKSErPatkCfGQGrA==
 givenName: Grzegorz
 cn: gtimoszuk
 sn: Timoszuk
-entryUUID: 78ccdef7-fe05-41c8-8a5c-782fd6fe3d98
-pwdChangedTime: 20110504231202.885Z
+entryUUID: 5b32b725-55d2-4347-940e-57426e5dcb93
+pwdChangedTime: 20110505185702.147Z
 creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
-createTimestamp: 20110504231202Z
-modifyTimestamp: 20110504231304Z
+createTimestamp: 20110505185702Z
+modifyTimestamp: 20110505185936Z
 modifiersName: cn=Directory Manager,cn=Root DNs,cn=config
 
 dn: ou=addressbook,cn=gtimoszuk,ou=users,ou=mimuw,o=uw,l=waw,c=pl
 objectClass: organizationalUnit
 objectClass: top
 ou: addressbook
-entryUUID: 2aa2512d-191f-4e52-bab5-38a967676879
-createTimestamp: 20110504231202Z
+entryUUID: 09484d69-7b1d-4195-8f5f-bf4751168ead
+createTimestamp: 20110505185702Z
 creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
 
 dn: ou=groups,ou=mimuw,o=uw,l=waw,c=pl
 objectClass: organizationalUnit
 objectClass: top
 ou:: Z3JvdXBzIA==
-entryUUID: de18e339-cb88-4911-b5ea-3f8c06785e34
-createTimestamp: 20110504231202Z
+entryUUID: 4e774734-cc85-40ea-a059-ed123386a65d
+createTimestamp: 20110505185702Z
 creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
 
 dn: cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
@@ -94,32 +98,35 @@ objectClass: groupOfUniqueNames
 objectClass: top
 cn: studenci
 uniqueMember: cn=jan1,ou=users,ou=mimuw,o=uw,l=waw,c=pl
-entryUUID: fb555b6c-d2ab-4d4a-b7f1-18da9ceab76a
-createTimestamp: 20110504231202Z
+entryUUID: 642ea0aa-fe35-4ac9-8213-c6fc3442ecb3
+createTimestamp: 20110505185702Z
 creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
 
 dn: ou=addressbook,cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
 objectClass: organizationalUnit
 objectClass: top
 ou:: YWRkcmVzc2Jvb2sgIA==
-entryUUID: 13b219b4-ee3d-49f6-9026-d25eb8d4a39d
-createTimestamp: 20110504231202Z
+entryUUID: 11206ab2-283f-4bf8-8b26-66e10760e0d9
+aci: (targetattr="*")(version 3.0; acl "read and modify rights for members of group: studenci on it's addressbook"; allow(all) groupdn = "ldap:///cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl";)
 creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+createTimestamp: 20110505185702Z
+modifyTimestamp: 20110505190022Z
+modifiersName: cn=Directory Manager,cn=Root DNs,cn=config
 
 dn: cn=rzecznik_praw_obywatlskich,ou=addressbook,cn=studenci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
 objectClass: person
-objectClass: organizationalPerson
 objectClass: inetOrgPerson
+objectClass: organizationalPerson
 objectClass: mimuwOrgPerson
 objectClass: top
 givenName:: TWllY3p5c8WCYXc=
 cn: rzecznik_praw_obywatlskich
 telephoneNumber: 224325522
 sn:: SWtzacWEc2tp
-entryUUID: 96e372f1-61cc-48b4-b4a3-c583f97cd6e4
+entryUUID: ba903490-8409-4d06-9b5f-e59f8a2412f9
 creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
-createTimestamp: 20110504231202Z
-modifyTimestamp: 20110504231304Z
+createTimestamp: 20110505185702Z
+modifyTimestamp: 20110505185936Z
 modifiersName: cn=Directory Manager,cn=Root DNs,cn=config
 
 dn: cn=doktoranci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
@@ -127,7 +134,18 @@ objectClass: groupOfUniqueNames
 objectClass: top
 cn: doktoranci
 uniqueMember: cn=gtimoszuk,ou=users,ou=mimuw,o=uw,l=waw,c=pl
-entryUUID: 8f059906-ecfb-4789-a1a1-a1f2af6cb67d
-createTimestamp: 20110504231202Z
+entryUUID: 151003e1-ae3a-44de-9525-59469d170732
+createTimestamp: 20110505185702Z
 creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+
+dn: ou=addressbook,cn=doktoranci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl
+objectClass: organizationalUnit
+objectClass: top
+ou: addressbook
+entryUUID: f74097dc-42f7-4c3b-a332-acc55ca37564
+aci: (targetattr="*")(version 3.0; acl "read and modify rights for members of group: doktoranci on it's addressbook"; allow(all) groupdn = "ldap:///cn=doktoranci,ou=groups,ou=mimuw,o=uw,l=waw,c=pl";)
+creatorsName: cn=Directory Manager,cn=Root DNs,cn=config
+createTimestamp: 20110505185702Z
+modifyTimestamp: 20110505190022Z
+modifiersName: cn=Directory Manager,cn=Root DNs,cn=config
 

@@ -9,7 +9,7 @@ public class Fixture {
     public static final String legitPassword = "jan1";
     public static final String legitFirstName = "Jan";
     public static final String legitLastName = "Kowalski";
-    public static final int phoneBookEntriesVisibleForLegitUser = 4;
+    public static final int phoneBookEntriesVisibleForLegitUser = 3;
 
     public static final String newFirstName = "newFirstName";
     public static final String newLastName = "newLastName";
